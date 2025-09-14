@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Letter with Holes</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #111;
+      color: #fff;
+      font-family: "Courier New", monospace;
+    }
+
+    /* Halaman awal */
+    .intro {
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      background: #fff;
+      color: #111;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #ddd;
+    }
+
+    /* Surat */
+    .paper {
+      display: none; /* sembunyi dulu */
+      position: relative;
+      background: #fff;
+      width: 420px;
+      padding: 40px 40px 40px 70px;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      line-height: 1.6em;
+      font-size: 16px;
+      white-space: pre-line;
+      color: #111;
+    }
+
+    /* Lubang binder */
+    .paper::before {
+      content: "";
+      position: absolute;
+      top: 20px;
+      left: 15px;
+      width: 12px;
+      height: calc(100% - 40px);
+      background-image: radial-gradient(circle, black 6px, transparent 7px);
+      background-repeat: repeat-y;
+      background-size: 12px 40px;
+    }
+
+    /* Efek mengetik */
+    .text {
+      border-right: 2px solid #111;
+      white-space: pre-wrap;
+      overflow: hidden;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Halaman Awal -->
+  <div class="intro" id="intro">
+    <p>i hope you read this, even if it's too late.</p>
+    <button class="btn" onclick="showLetter()">Read it</button>
+  </div>
+
+  <!-- Surat -->
+  <div class="paper" id="paper">
+    <div class="text" id="typing"></div>
+  </div>
+
+  <script>
+    const text = `I don’t even know if you’ll ever read this.
+But if you do… I just want you to know, I still think about you sometimes.
+
+We both tried. We both cared. But the universe just never gave us enough space to become “us.”
+
+I just wonder… if we had met at a different point in life, would the ending have been different?
+
+Anyway, I hope you’re doing okay, even though we’re not in each other’s lives anymore.`;
+
+    let i = 0;
+
+    function showLetter() {
+      // sembunyikan intro
+      document.getElementById("intro").style.display = "none";
+      // tampilkan surat
+      document.getElementById("paper").style.display = "block";
+      // mulai mengetik
+      typeWriter();
+    }
+
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50); // kecepatan mengetik
+      }
+    }
+  </script>
+</body>
+</html>
